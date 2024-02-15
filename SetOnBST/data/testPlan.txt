@@ -1,0 +1,59 @@
+SetOnBST Project #4 Test Plan
+
+Constructor (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+Add (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+Remove (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+RemoveAny (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+Contains (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+Size (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+isInTree (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+insertInTree (LAYAN/OAK)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+removeSmallest (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+removeFromTree (OAK/LAYAN)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+createNewRep (DONE)
+1. edge case (empty)
+2. special case (unique inputs)
+3. routine case (normal/no empty)
+
+
+
