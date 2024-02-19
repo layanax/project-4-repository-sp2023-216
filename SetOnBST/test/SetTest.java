@@ -1,8 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -74,157 +70,267 @@ public abstract class SetTest {
         return set;
     }
 
-    //constructor tests
+    //constructor test
 
     @Test
-    public void testConstructorEdgeCase() {
+    public void testConstructorRoutine() {
         Set<String> set = this.constructorTest();
-        assertTrue(set.size() == 0);
-    }
+        Set<String> expected = this.constructorRef();
 
-    @Test
-    public void testConstructorSpecialCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        assertFalse(set.size() == 0);
-    }
+        assertEquals(expected, set);
 
-    @Test
-    public void testConstructorRoutineCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        assertEquals(2, set.size());
     }
 
     //add tests
 
+    //test adding to empty
     @Test
     public void testAddEdgeCase() {
-        Set<String> set = this.constructorTest();
-        assertFalse(set.contains("A"));
+        Set<String> set = this.createFromArgsTest();
+        Set<String> expected = this.createFromArgsRef("A");
+        set.add("A");
+
+        assertEquals(expected, set);
     }
 
+    //test adding with only 1 other item in the tree
     @Test
     public void testAddSpecialCase() {
-        Set<String> set = this.constructorTest();
+        Set<String> set = this.createFromArgsTest("B");
+        Set<String> expected = this.createFromArgsRef("A", "B");
         set.add("A");
-        assertTrue(set.contains("A"));
+
+        assertEquals(expected, set);
     }
 
+    //test adding with only left trees
     @Test
-    public void testAddRoutineCase() {
-        Set<String> set = this.constructorTest();
+    public void testAddRoutinCase1() {
+        Set<String> set = this.createFromArgsTest("D", "C", "B");
+        Set<String> expected = this.createFromArgsRef("D", "C", "B", "A");
         set.add("A");
-        set.add("B");
-        assertEquals(2, set.size());
+
+        assertEquals(expected, set);
+    }
+
+    //test adding with only right trees
+    @Test
+    public void testAddRoutinCase2() {
+        Set<String> set = this.createFromArgsTest("A", "B", "C");
+        Set<String> expected = this.createFromArgsRef("A", "B", "C", "D");
+        set.add("D");
+
+        assertEquals(expected, set);
+    }
+
+    //test adding with both left and right
+    @Test
+    public void testAddRoutinCase3() {
+        Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F");
+        Set<String> expected = this.createFromArgsTest("D", "B", "K", "A", "C",
+                "F", "E");
+        set.add("E");
+
+        assertEquals(expected, set);
     }
 
     //remove tests
 
     @Test
+    //removing to an empty set
     public void testRemoveEdgeCase() {
-        Set<String> set = this.constructorTest();
-        assertNull(set.remove("A"));
+        Set<String> set = this.createFromArgsTest("A");
+        Set<String> expected = this.createFromArgsRef();
+        String temp = set.remove("A");
+
+        assertEquals(expected, set);
+        assertEquals("A", temp);
     }
 
     @Test
-    public void testRemoveSpecialCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        assertEquals("B", set.remove("B"));
-        assertFalse(set.contains("B"));
+    //removing root node
+    public void testRemoveSpecial() {
+        Set<String> set = this.createFromArgsTest("C", "B", "A", "D");
+        Set<String> expected = this.createFromArgsRef("B", "A", "D");
+        String temp = set.remove("C");
+
+        assertEquals(expected, set);
+        assertEquals("C", temp);
     }
 
     @Test
+    //removing to non empty with both left and right subtree from end
     public void testRemoveRoutineCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        set.add("C");
-        assertEquals("B", set.remove("B"));
+        Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F",
+                "L", "E");
+        Set<String> expected = this.createFromArgsRef("D", "B", "K", "A", "F",
+                "L", "E");
+        String temp = set.remove("C");
+
+        assertEquals(expected, set);
+        assertEquals("C", temp);
+    }
+
+    //removing to non empty with both left and right subtree from middle
+    @Test
+    public void testRemoveRoutineCase2() {
+        Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F",
+                "L", "E");
+        Set<String> expected = this.createFromArgsRef("D", "B", "C", "A", "F",
+                "L", "E");
+        String temp = set.remove("K");
+
+        assertEquals(expected, set);
+        assertEquals("K", temp);
+    }
+
+    //removing to non empty with only left from end
+    @Test
+    public void testRemoveRoutineCase3() {
+        Set<String> set = this.createFromArgsTest("D", "C", "B", "A");
+        Set<String> expected = this.createFromArgsRef("D", "C", "B");
+        String temp = set.remove("A");
+
+        assertEquals(expected, set);
+        assertEquals("A", temp);
+    }
+
+    //removing to non empty with only left from middle
+    @Test
+    public void testRemoveRoutineCase4() {
+        Set<String> set = this.createFromArgsTest("D", "C", "B", "A");
+        Set<String> expected = this.createFromArgsRef("D", "C", "A");
+        String temp = set.remove("B");
+
+        assertEquals(expected, set);
+        assertEquals("B", temp);
+    }
+
+    //removing to non empty with only right from end
+    @Test
+    public void testRemoveRoutineCase5() {
+        Set<String> set = this.createFromArgsTest("A", "B", "C", "D");
+        Set<String> expected = this.createFromArgsRef("A", "B", "C");
+        String temp = set.remove("D");
+
+        assertEquals(expected, set);
+        assertEquals("D", temp);
+    }
+
+    //removing to non empty with only right from middle
+    @Test
+    public void testRemoveRoutineCase6() {
+        Set<String> set = this.createFromArgsTest("A", "B", "C", "D");
+        Set<String> expected = this.createFromArgsRef("A", "C", "D");
+        String temp = set.remove("B");
+
+        assertEquals(expected, set);
+        assertEquals("B", temp);
     }
 
     //removeAny tests
 
     @Test
     public void testRemoveAnyEdgeCase() {
-        Set<String> set = this.constructorTest();
-        assertNull(set.removeAny());
+        Set<String> set = this.createFromArgsTest("A");
+        Set<String> expected = this.createFromArgsRef();
+        String temp = set.removeAny();
+
+        assertEquals(expected, set);
+        assertEquals(temp, "A");
+
     }
 
     @Test
     public void testRemoveAnySpecialCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        assertNotNull(set.removeAny());
+        Set<String> set = this.createFromArgsTest("A", "B");
+        Set<String> expected = this.createFromArgsRef("B");
+        String temp = set.removeAny();
+
+        assertEquals(expected, set);
+        assertEquals("A", temp);
     }
 
     @Test
     public void testRemoveAnyRoutineCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        set.add("C");
-        assertNotNull(set.removeAny());
+        Set<String> set = this.createFromArgsTest("C", "A", "B");
+        Set<String> expected = this.createFromArgsRef("C", "B");
+        String temp = set.removeAny();
+
+        assertEquals(expected, set);
+        assertEquals("A", temp);
+
     }
 
     //contains tests
-
     @Test
-    public void testContainsEdgeCase() {
-        Set<String> set = this.constructorTest();
-        assertFalse(set.contains("A"));
+    public void testContainsaEdgeCase() {
+        Set<String> set = this.createFromArgsTest();
+        Set<String> expected = this.createFromArgsRef();
+
+        assertEquals(false, set.contains("great"));
+        assertEquals(expected, set);
     }
 
-    @Test
-    public void testContainsSpecialCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        assertTrue(set.contains("A"));
+    public void testContainsSpecialCase1() {
+        Set<String> set = this.createFromArgsTest("A");
+        Set<String> expected = this.createFromArgsRef("A");
+
+        assertEquals(true, set.contains("A"));
+        assertEquals(expected, set);
     }
 
-    @Test
-    public void testContainsRoutineCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
-        assertTrue(set.contains("B"));
+    public void testContainsSpecialCase2() {
+        Set<String> set = this.createFromArgsTest("A");
+        Set<String> expected = this.createFromArgsRef("A");
+
+        assertEquals(false, set.contains("B"));
+        assertEquals(expected, set);
+    }
+
+    public void testContainsNormalCase() {
+        Set<String> set = this.createFromArgsTest("A", "C");
+        Set<String> expected = this.createFromArgsRef("A", "C");
+
+        assertEquals(false, set.contains("B"));
+        assertEquals(expected, set);
+    }
+
+    public void testContainsNormalCase2() {
+        Set<String> set = this.createFromArgsTest("A", "B", "C");
+        Set<String> expected = this.createFromArgsRef("A", "B", "C");
+
+        assertEquals(true, set.contains("B"));
+        assertEquals(expected, set);
     }
 
     //size tests
 
     @Test
     public void testSizeEdgeCase() {
-        Set<String> set = this.constructorTest();
+        Set<String> set = this.createFromArgsTest();
+        Set<String> expected = this.createFromArgsRef();
+
         assertEquals(0, set.size());
+        assertEquals(expected, set);
     }
 
     @Test
     public void testSizeSpecialCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
+        Set<String> set = this.createFromArgsTest("A");
+        Set<String> expected = this.createFromArgsRef("A");
+
         assertEquals(1, set.size());
+        assertEquals(expected, set);
     }
 
     @Test
     public void testSizeRoutineCase() {
-        Set<String> set = this.constructorTest();
-        set.add("A");
-        set.add("B");
+        Set<String> set = this.createFromArgsTest("A", "B");
+        Set<String> expected = this.createFromArgsRef("A", "B");
+
         assertEquals(2, set.size());
+        assertEquals(expected, set);
     }
-
-    //isInTree tests
-
-    //insertInTree tests
-
-    //removeSmallest tests
-
-    //removeFromTree tests
-
-    //createNewRep tests
 
 }
