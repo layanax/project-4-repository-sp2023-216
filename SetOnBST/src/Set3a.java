@@ -98,22 +98,12 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
             BinaryTree<T> left = t.newInstance();
             BinaryTree<T> right = t.newInstance();
             T root = t.disassemble(left, right);
-<<<<<<< HEAD
             if (x.compareTo(root) < 0) {
                 insertInTree(left, x);
             } else {
                 insertInTree(right, x);
             }
             t.assemble(root, left, right);
-        }
-=======
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-4-repository-sp2023-216.git
-
-            if (x.compareTo(root) < 0) {
-                insertInTree(left, x);
-            } else {
-                insertInTree(right, x);
-            }
         }
     }
 
@@ -182,11 +172,6 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         BinaryTree<T> right = t.newInstance();
         T root = t.disassemble(left, right);
 
-<<<<<<< HEAD
-        //This line added just to make the component compilable.
-        return null;
-
-=======
         if (root.compareTo(x) == 0) {
             if (right.size() > 0 && left.size() == 0) {
                 t.transferFrom(right);
@@ -205,7 +190,6 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         }
 
         return removed;
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-4-repository-sp2023-216.git
     }
 
     /**
