@@ -74,6 +74,7 @@ public abstract class SetTest {
         return set;
     }
 
+<<<<<<< HEAD
     //constructor tests
 
     @Test
@@ -226,5 +227,8 @@ public abstract class SetTest {
     //removeFromTree tests
 
     //createNewRep tests
+=======
+    // TODO - add test cases for constructor, add, remove, removeAny, contains, and size@Test
+>>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-4-repository-sp2023-216.git
 
 }
