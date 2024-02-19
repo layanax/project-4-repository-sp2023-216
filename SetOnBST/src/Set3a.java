@@ -22,7 +22,7 @@ import components.set.SetSecondary;
  * @convention IS_BST($this.tree)
  * @correspondence this = labels($this.tree)
  *
- * @author Put your name here
+ * @author Layan Abdallah & Oak Hodous
  *
  */
 public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
@@ -92,7 +92,19 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
 
-        // TODO - fill in body
+        if (t.size() == 0) {
+            t.assemble(x, t.newInstance(), t.newInstance());
+        } else {
+            BinaryTree<T> left = t.newInstance();
+            BinaryTree<T> right = t.newInstance();
+            T root = t.disassemble(left, right);
+            if (x.compareTo(root) < 0) {
+                insertInTree(left, x);
+            } else {
+                insertInTree(right, x);
+            }
+            t.assemble(root, left, right);
+        }
 
     }
 
@@ -158,8 +170,9 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
 
         // TODO - fill in body
 
-        // This line added just to make the component compilable.
+        //This line added just to make the component compilable.
         return null;
+
     }
 
     /**
