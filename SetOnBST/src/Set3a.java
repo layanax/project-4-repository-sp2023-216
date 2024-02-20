@@ -61,10 +61,13 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         if (t.height() != 0) {
             T root = t.disassemble(left, right);
             int check = x.compareTo(root);
+            //recursively search right subtree
             if (check > 0) {
                 result = isInTree(right, x);
+                //recursively search left subtree
             } else if (check < 0) {
                 result = isInTree(left, x);
+                //x is equal to the root
             } else {
                 result = true;
             }
@@ -133,16 +136,18 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         BinaryTree<T> right = t.newInstance();
         T root = t.disassemble(left, right);
 
+        //smallest is the root
         T smallest = root;
 
+        //if left subtree is not empty
         if (left.height() > 0) {
+            //recursively remove smallest from left subtree
             smallest = removeSmallest(left);
             t.assemble(root, left, right);
+            //if left subtree is empty, transfer right subtree to current
         } else {
             t.transferFrom(right);
         }
-
-        // This line added just to make the component compilable.
         return smallest;
     }
 
@@ -176,22 +181,27 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         T root = t.disassemble(left, right);
 
         if (root.compareTo(x) == 0) {
+            //if right subtree is not empty and left subtree is empty
             if (right.size() > 0 && left.size() == 0) {
-                t.transferFrom(right);
+                t.transferFrom(right); //transfer right subtree to current
+                //if left subtree is not empty and right subtree is empty
             } else if (left.size() > 0 && right.size() == 0) {
-                t.transferFrom(left);
+                t.transferFrom(left); //transfer left subtree to current
+                //if both left and right subtrees are not empty
             } else if (left.size() > 0 && right.size() > 0) {
+                //remove smallest from right subtree
                 T smallest = removeSmallest(right);
                 t.assemble(smallest, left, right);
             }
         } else if (x.compareTo(root) > 0) {
+            //recursively remove x from right subtree
             removed = removeFromTree(right, x);
             t.assemble(root, left, right);
         } else {
+            //recursively remove x from left subtree
             removed = removeFromTree(left, x);
             t.assemble(root, left, right);
         }
-
         return removed;
     }
 
@@ -279,7 +289,6 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
         return removeSmallest(this.tree);
-
     }
 
     @Override

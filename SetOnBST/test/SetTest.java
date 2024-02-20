@@ -72,6 +72,9 @@ public abstract class SetTest {
 
     //constructor test
 
+    /**
+     * Constructor test with routine check.
+     */
     @Test
     public void testConstructorRoutine() {
         Set<String> set = this.constructorTest();
@@ -83,7 +86,9 @@ public abstract class SetTest {
 
     //add tests
 
-    //test adding to empty
+    /**
+     * Test case for add with an empty set.
+     */
     @Test
     public void testAddEdgeCase() {
         Set<String> set = this.createFromArgsTest();
@@ -93,7 +98,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
-    //test adding with only 1 other item in the tree
+    /**
+     * Test case for add with only 1 other item in the tree.
+     */
     @Test
     public void testAddSpecialCase() {
         Set<String> set = this.createFromArgsTest("B");
@@ -103,7 +110,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
-    //test adding with only left trees
+    /**
+     * Test case for add with only left trees.
+     */
     @Test
     public void testAddRoutinCase1() {
         Set<String> set = this.createFromArgsTest("D", "C", "B");
@@ -113,7 +122,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
-    //test adding with only right trees
+    /**
+     * Test case for add with only right trees.
+     */
     @Test
     public void testAddRoutinCase2() {
         Set<String> set = this.createFromArgsTest("A", "B", "C");
@@ -123,7 +134,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
-    //test adding with both left and right
+    /**
+     * Test case for add with both left and right trees.
+     */
     @Test
     public void testAddRoutinCase3() {
         Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F");
@@ -136,8 +149,10 @@ public abstract class SetTest {
 
     //remove tests
 
+    /**
+     * Test case for remove with an empty set.
+     */
     @Test
-    //removing to an empty set
     public void testRemoveEdgeCase() {
         Set<String> set = this.createFromArgsTest("A");
         Set<String> expected = this.createFromArgsRef();
@@ -147,8 +162,10 @@ public abstract class SetTest {
         assertEquals("A", temp);
     }
 
+    /**
+     * Test case for remove with the root node.
+     */
     @Test
-    //removing root node
     public void testRemoveSpecial() {
         Set<String> set = this.createFromArgsTest("C", "B", "A", "D");
         Set<String> expected = this.createFromArgsRef("B", "A", "D");
@@ -158,8 +175,11 @@ public abstract class SetTest {
         assertEquals("C", temp);
     }
 
+    /**
+     * Test case for remove to non empty with both left and right subtrees from
+     * end.
+     */
     @Test
-    //removing to non empty with both left and right subtree from end
     public void testRemoveRoutineCase() {
         Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F",
                 "L", "E");
@@ -171,7 +191,10 @@ public abstract class SetTest {
         assertEquals("C", temp);
     }
 
-    //removing to non empty with both left and right subtree from middle
+    /**
+     * Test case for remove to non empty with both left and right subtrees from
+     * middle.
+     */
     @Test
     public void testRemoveRoutineCase2() {
         Set<String> set = this.createFromArgsTest("D", "B", "K", "A", "C", "F",
@@ -184,7 +207,9 @@ public abstract class SetTest {
         assertEquals("K", temp);
     }
 
-    //removing to non empty with only left from end
+    /**
+     * Test case for remove to non empty with only left subtree from end.
+     */
     @Test
     public void testRemoveRoutineCase3() {
         Set<String> set = this.createFromArgsTest("D", "C", "B", "A");
@@ -195,7 +220,9 @@ public abstract class SetTest {
         assertEquals("A", temp);
     }
 
-    //removing to non empty with only left from middle
+    /**
+     * Test case for remove to non empty with only left subtree from middle.
+     */
     @Test
     public void testRemoveRoutineCase4() {
         Set<String> set = this.createFromArgsTest("D", "C", "B", "A");
@@ -206,7 +233,9 @@ public abstract class SetTest {
         assertEquals("B", temp);
     }
 
-    //removing to non empty with only right from end
+    /**
+     * Test case for remove to non empty with only right subtree from end.
+     */
     @Test
     public void testRemoveRoutineCase5() {
         Set<String> set = this.createFromArgsTest("A", "B", "C", "D");
@@ -217,7 +246,9 @@ public abstract class SetTest {
         assertEquals("D", temp);
     }
 
-    //removing to non empty with only right from middle
+    /**
+     * Test case for remove to non empty with only right subtree from middle.
+     */
     @Test
     public void testRemoveRoutineCase6() {
         Set<String> set = this.createFromArgsTest("A", "B", "C", "D");
@@ -230,6 +261,9 @@ public abstract class SetTest {
 
     //removeAny tests
 
+    /**
+     * Test case for removeAny with an empty set.
+     */
     @Test
     public void testRemoveAnyEdgeCase() {
         Set<String> set = this.createFromArgsTest("A");
@@ -241,6 +275,9 @@ public abstract class SetTest {
 
     }
 
+    /**
+     * Test case for removeAny with a set containing one item.
+     */
     @Test
     public void testRemoveAnySpecialCase() {
         Set<String> set = this.createFromArgsTest("A", "B");
@@ -251,6 +288,9 @@ public abstract class SetTest {
         assertEquals("A", temp);
     }
 
+    /**
+     * Test case for removeAny with a set containing multiple items.
+     */
     @Test
     public void testRemoveAnyRoutineCase() {
         Set<String> set = this.createFromArgsTest("C", "A", "B");
@@ -263,6 +303,10 @@ public abstract class SetTest {
     }
 
     //contains tests
+
+    /**
+     * Test case for contains with an empty set.
+     */
     @Test
     public void testContainsaEdgeCase() {
         Set<String> set = this.createFromArgsTest();
@@ -272,6 +316,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for contains with a set containing one item.
+     */
     public void testContainsSpecialCase1() {
         Set<String> set = this.createFromArgsTest("A");
         Set<String> expected = this.createFromArgsRef("A");
@@ -280,6 +327,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for contains with a set containing one item (not present).
+     */
     public void testContainsSpecialCase2() {
         Set<String> set = this.createFromArgsTest("A");
         Set<String> expected = this.createFromArgsRef("A");
@@ -288,6 +338,10 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for contains with a set containing multiple items (not
+     * present).
+     */
     public void testContainsNormalCase() {
         Set<String> set = this.createFromArgsTest("A", "C");
         Set<String> expected = this.createFromArgsRef("A", "C");
@@ -296,6 +350,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for contains with a set containing multiple items.
+     */
     public void testContainsNormalCase2() {
         Set<String> set = this.createFromArgsTest("A", "B", "C");
         Set<String> expected = this.createFromArgsRef("A", "B", "C");
@@ -306,6 +363,9 @@ public abstract class SetTest {
 
     //size tests
 
+    /**
+     * Test case for size of an empty set.
+     */
     @Test
     public void testSizeEdgeCase() {
         Set<String> set = this.createFromArgsTest();
@@ -315,6 +375,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for size of a set containing one item.
+     */
     @Test
     public void testSizeSpecialCase() {
         Set<String> set = this.createFromArgsTest("A");
@@ -324,6 +387,9 @@ public abstract class SetTest {
         assertEquals(expected, set);
     }
 
+    /**
+     * Test case for size of a set containing multiple items.
+     */
     @Test
     public void testSizeRoutineCase() {
         Set<String> set = this.createFromArgsTest("A", "B");
